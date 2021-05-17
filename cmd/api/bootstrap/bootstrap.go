@@ -1,7 +1,7 @@
 package bootstrap
 
 import (
-	"github.com/franciscoruizar/quasar-fire/internal/core/server"
+	server "github.com/franciscoruizar/quasar-fire/internal/core/server"
 )
 
 const (

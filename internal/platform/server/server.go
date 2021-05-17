@@ -2,9 +2,12 @@ package server
 
 import (
 	"fmt"
-	"github.com/franciscoruizar/quasar-fire/internal/core/handler/health"
-	"github.com/gin-gonic/gin"
 	"log"
+
+	"github.com/franciscoruizar/quasar-fire/internal/platform/server/handler/health"
+	"github.com/franciscoruizar/quasar-fire/internal/platform/server/handler/topsecret"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Server struct {
@@ -29,4 +32,5 @@ func (s *Server) Run() error {
 
 func (s *Server) registerRoutes() {
 	s.engine.GET("/health", health.CheckHandler())
+	s.engine.POST("/topsecret", topsecret.CreateHandler())
 }
