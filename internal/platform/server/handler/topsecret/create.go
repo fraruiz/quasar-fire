@@ -32,24 +32,27 @@ func TopSecretCreateHandler(service usecases.TopSecretCreator) gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, err.Error())
 		}
 
-		var requests []usecases.TopSecretCreatorRequest
+		var satellites []usecases.TopSecretCreatorRequest
 		for i := 0; i < len(req.Satellites); i++ {
-			requests = append(requests, usecases.TopSecretCreatorRequest{
+			satellites = append(satellites, usecases.TopSecretCreatorRequest{
 				Name:      req.Satellites[i].Name,
 				Dinstance: req.Satellites[i].Distance,
 				Message:   req.Satellites[i].Message,
 			})
 		}
 
-		response, err := service.Create(requests)
+		response, err := service.Create(satellites)
 
 		if err != nil {
+			errorMessage := handler.Error{
+				Message: err.Error(),
+			}
 			switch {
 			case errors.Is(err, core.ErrInvalidSateliteID):
-				c.JSON(http.StatusBadRequest, err.Error())
+				c.JSON(http.StatusBadRequest, errorMessage)
 				return
 			default:
-				c.JSON(http.StatusInternalServerError, err.Error())
+				c.JSON(http.StatusInternalServerError, errorMessage)
 				return
 			}
 		}

@@ -12,9 +12,9 @@ type SateliteRepository struct {
 }
 
 func NewInMemorySateliteRepository() *SateliteRepository {
-	kenobi, err := core.NewSatelite(uuid.NewString(), "kenobi", -500, -200, 100, []string{"este", "", "", "mensaje", ""})
-	skywalker, err1 := core.NewSatelite(uuid.NewString(), "skywalker", 100, -100, 115.5, []string{"", "es", "", "", "secreto"})
-	sato, err2 := core.NewSatelite(uuid.NewString(), "sato", 500, 100, 142.7, []string{"este", "", "un", "", ""})
+	kenobi, err := core.NewSatelite(uuid.NewString(), "kenobi", -500, -200)
+	skywalker, err1 := core.NewSatelite(uuid.NewString(), "skywalker", 100, -100)
+	sato, err2 := core.NewSatelite(uuid.NewString(), "sato", 500, 100)
 
 	if err != nil || err1 != nil || err2 != nil {
 		return &SateliteRepository{

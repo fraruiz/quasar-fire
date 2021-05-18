@@ -15,9 +15,8 @@ func Run() error {
 	sateliteRepository := memory.NewInMemorySateliteRepository()
 
 	topSecretCreator := usecases.NewTopSecretCreator(sateliteRepository)
-	topSecretSplitCreator := usecases.NewTopSecretSplitCreator()
 	sateliteFinder := usecases.NewSateliteFinder(sateliteRepository)
 
-	srv := server.New(host, port, topSecretCreator, sateliteFinder, topSecretSplitCreator)
+	srv := server.New(host, port, topSecretCreator, sateliteFinder)
 	return srv.Run()
 }

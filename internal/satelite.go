@@ -28,11 +28,9 @@ type Satelite struct {
 	ID       SateliteID
 	Name     string
 	Position Position
-	Distance float64
-	Message  []string
 }
 
-func NewSatelite(id string, name string, x float64, y float64, distance float64, message []string) (Satelite, error) {
+func NewSatelite(id string, name string, x float64, y float64) (Satelite, error) {
 	idVO, err := NewSateliteID(id)
 
 	if err != nil {
@@ -43,8 +41,6 @@ func NewSatelite(id string, name string, x float64, y float64, distance float64,
 		ID:       idVO,
 		Name:     name,
 		Position: NewPosition(x, y),
-		Distance: distance,
-		Message:  message,
 	}, nil
 }
 

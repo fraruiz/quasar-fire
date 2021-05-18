@@ -5,16 +5,14 @@ import (
 )
 
 type TopSecretCreator struct {
-	sateliteCreator SateliteCreator
-	decoder         MessageDecoder
-	finder          LocationFinder
+	messageDecoder MessageDecoder
+	locationFinder LocationFinder
 }
 
 func NewTopSecretCreator(repository core.SateliteRepository) TopSecretCreator {
 	return TopSecretCreator{
-		sateliteCreator: NewSateliteCreator(repository),
-		decoder:         NewMessageDecoder(),
-		finder:          NewLocationFinder(repository),
+		messageDecoder: NewMessageDecoder(),
+		locationFinder: NewLocationFinder(repository),
 	}
 }
 
@@ -33,15 +31,17 @@ func (creator TopSecretCreator) Create(requests []TopSecretCreatorRequest) (TopS
 
 	var distances []float64
 	var messages [][]string
+	var satellites []string
 
 	for i := 0; i < len(requests); i++ {
 		request := requests[i]
 		messages = append(messages, request.Message)
 		distances = append(distances, request.Dinstance)
+		satellites = append(satellites, request.Name)
 	}
 
-	message := creator.decoder.Decode(messages)
-	position, err := creator.finder.Find(distances)
+	message := creator.messageDecoder.Decode(messages)
+	position, err := creator.locationFinder.Find(distances, satellites)
 
 	if err != nil {
 		return TopSecretCreatorResponse{}, err
