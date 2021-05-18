@@ -15,9 +15,9 @@ func NewSateliteCreator(repository core.SateliteRepository) SateliteCreator {
 	}
 }
 
-func (s SateliteCreator) Create(name string, x float64, y float64, message []string) (core.Satelite, error) {
+func (s SateliteCreator) Create(name string, x float64, y float64, distance float64, message []string) (core.Satelite, error) {
 	id := uuid.NewString()
-	satelite, err := core.NewSatelite(id, name, x, y, message)
+	satelite, err := core.NewSatelite(id, name, x, y, distance, message)
 	if err != nil {
 		return satelite, err
 	}

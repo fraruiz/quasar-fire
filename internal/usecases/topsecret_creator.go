@@ -44,7 +44,7 @@ func (creator TopSecretCreator) Create(requests []TopSecretCreatorRequest) (TopS
 	position, err := creator.finder.Find(distances)
 
 	if err != nil {
-		return TopSecretCreatorResponse{}, nil
+		return TopSecretCreatorResponse{}, err
 	}
 
 	return TopSecretCreatorResponse{
