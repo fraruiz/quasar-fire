@@ -39,7 +39,7 @@ func (r *SateliteRepository) FindByName(name string) (domain.Satelite, error) {
 	values := r.values
 
 	for i := 0; i < len(values); i++ {
-		if values[i].Name().String() == name {
+		if values[i].Name().Value() == name {
 			return values[i], nil
 		}
 	}

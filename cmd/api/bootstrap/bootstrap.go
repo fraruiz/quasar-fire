@@ -32,8 +32,7 @@ func Run() error {
 	sateliteRepository := mysql.NewSateliteRepository(db)
 
 	topSecretCreator := usecases.NewTopSecretCreator(sateliteRepository)
-	sateliteFinder := usecases.NewSateliteFinder(sateliteRepository)
 
-	srv := server.New(host, port, topSecretCreator, sateliteFinder)
+	srv := server.New(host, port, topSecretCreator)
 	return srv.Run()
 }

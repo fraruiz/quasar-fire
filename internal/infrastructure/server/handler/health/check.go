@@ -6,8 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type HealthCheck struct {
+	Message string `json:"message" binding:"required"`
+}
+
 func CheckHandler() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, "everything is ok!")
+		ctx.JSONP(http.StatusOK, HealthCheck{
+			Message: "everything is ok!",
+		})
 	}
 }

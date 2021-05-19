@@ -8,47 +8,37 @@ import (
 type TopSecretCreator struct {
 	messageDecoder MessageDecoder
 	locationFinder LocationFinder
+	sateliteFinder SateliteFinder
 }
 
-func NewTopSecretCreator(repository domain.SateliteRepository) TopSecretCreator {
+func NewTopSecretCreator(sateliteRepository domain.SateliteRepository) TopSecretCreator {
 	return TopSecretCreator{
 		messageDecoder: NewMessageDecoder(),
-		locationFinder: NewLocationFinder(repository),
+		locationFinder: NewLocationFinder(sateliteRepository),
+		sateliteFinder: NewSateliteFinder(sateliteRepository),
 	}
 }
 
-type TopSecretCreatorRequest struct {
-	Name      string
-	Dinstance float64
-	Message   []string
-}
-
-type TopSecretCreatorResponse struct {
-	Position dto.PositionResponse
-	Message  string
-}
-
-func (creator TopSecretCreator) Create(requests []TopSecretCreatorRequest) (TopSecretCreatorResponse, error) {
-
+func (creator TopSecretCreator) Create(requests []dto.TopSecretRequest) (dto.TopSecretResponse, error) {
 	var distances []float64
 	var messages [][]string
-	var satellites []string
+	var satellitesName []string
 
 	for i := 0; i < len(requests); i++ {
 		request := requests[i]
 		messages = append(messages, request.Message)
-		distances = append(distances, request.Dinstance)
-		satellites = append(satellites, request.Name)
+		distances = append(distances, request.Distance)
+		satellitesName = append(satellitesName, request.Name)
 	}
 
 	message := creator.messageDecoder.Decode(messages)
-	position, err := creator.locationFinder.Find(distances, satellites)
+	position, err := creator.locationFinder.Find(distances, satellitesName)
 
 	if err != nil {
-		return TopSecretCreatorResponse{}, err
+		return dto.TopSecretResponse{}, err
 	}
 
-	return TopSecretCreatorResponse{
+	return dto.TopSecretResponse{
 		Position: dto.NewPositionResponse(position.X().Value(), position.Y().Value()),
 		Message:  message,
 	}, nil
