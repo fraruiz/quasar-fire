@@ -11,7 +11,7 @@ type SateliteRepository struct {
 	values []core.Satelite
 }
 
-func NewInMemorySateliteRepository() *SateliteRepository {
+func NewSateliteRepository() *SateliteRepository {
 	kenobi, err := core.NewSatelite(uuid.NewString(), "kenobi", -500, -200)
 	skywalker, err1 := core.NewSatelite(uuid.NewString(), "skywalker", 100, -100)
 	sato, err2 := core.NewSatelite(uuid.NewString(), "sato", 500, 100)
@@ -31,8 +31,8 @@ func (r *SateliteRepository) Save(satelite core.Satelite) error {
 	return nil
 }
 
-func (r *SateliteRepository) FindAll() []core.Satelite {
-	return r.values
+func (r *SateliteRepository) FindAll() ([]core.Satelite, error) {
+	return r.values, nil
 }
 
 func (r *SateliteRepository) FindByName(name string) (core.Satelite, error) {

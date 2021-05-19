@@ -8,7 +8,7 @@ import (
 )
 
 type SateliteID struct {
-	value string
+	Value string
 }
 
 var ErrInvalidSateliteID = errors.New("invalid Course ID")
@@ -20,7 +20,7 @@ func NewSateliteID(value string) (SateliteID, error) {
 	}
 
 	return SateliteID{
-		value: v.String(),
+		Value: v.String(),
 	}, nil
 }
 
@@ -46,6 +46,6 @@ func NewSatelite(id string, name string, x float64, y float64) (Satelite, error)
 
 type SateliteRepository interface {
 	Save(satelite Satelite) error
-	FindAll() []Satelite
+	FindAll() ([]Satelite, error)
 	FindByName(name string) (Satelite, error)
 }
