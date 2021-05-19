@@ -4,9 +4,10 @@ import (
 	"errors"
 	"net/http"
 
-	core "github.com/franciscoruizar/quasar-fire/internal"
-	"github.com/franciscoruizar/quasar-fire/internal/platform/server/handler"
+	domain "github.com/franciscoruizar/quasar-fire/internal/domain"
+	"github.com/franciscoruizar/quasar-fire/internal/infrastructure/server/handler"
 	"github.com/franciscoruizar/quasar-fire/internal/usecases"
+	"github.com/franciscoruizar/quasar-fire/internal/usecases/dto"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,8 +22,8 @@ type CreateRequest struct {
 }
 
 type CreateResponse struct {
-	Position handler.PositionResponse `json:"position" binding:"required"`
-	Message  string                   `json:"message" binding:"required"`
+	Position dto.PositionResponse `json:"position" binding:"required"`
+	Message  string               `json:"message" binding:"required"`
 }
 
 func TopSecretCreateHandler(service usecases.TopSecretCreator) gin.HandlerFunc {
@@ -48,7 +49,7 @@ func TopSecretCreateHandler(service usecases.TopSecretCreator) gin.HandlerFunc {
 				Message: err.Error(),
 			}
 			switch {
-			case errors.Is(err, core.ErrInvalidSateliteID):
+			case errors.Is(err, domain.ErrInvalidSateliteID):
 				c.JSON(http.StatusBadRequest, errorMessage)
 				return
 			default:
@@ -59,7 +60,7 @@ func TopSecretCreateHandler(service usecases.TopSecretCreator) gin.HandlerFunc {
 
 		responseMap := CreateResponse{
 			Message:  response.Message,
-			Position: handler.NewPositionResponse(response.Position.X, response.Position.Y),
+			Position: response.Position,
 		}
 
 		c.Status(http.StatusCreated)

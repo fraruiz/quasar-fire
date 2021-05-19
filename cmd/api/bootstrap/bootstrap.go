@@ -4,9 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 
-	server "github.com/franciscoruizar/quasar-fire/internal/platform/server"
-	"github.com/franciscoruizar/quasar-fire/internal/platform/storage/mysql"
+	server "github.com/franciscoruizar/quasar-fire/internal/infrastructure/server"
+	"github.com/franciscoruizar/quasar-fire/internal/infrastructure/storage/mysql"
 	"github.com/franciscoruizar/quasar-fire/internal/usecases"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 const (

@@ -1,7 +1,8 @@
 package usecases
 
 import (
-	core "github.com/franciscoruizar/quasar-fire/internal"
+	domain "github.com/franciscoruizar/quasar-fire/internal/domain"
+	dto "github.com/franciscoruizar/quasar-fire/internal/usecases/dto"
 )
 
 type TopSecretCreator struct {
@@ -9,7 +10,7 @@ type TopSecretCreator struct {
 	locationFinder LocationFinder
 }
 
-func NewTopSecretCreator(repository core.SateliteRepository) TopSecretCreator {
+func NewTopSecretCreator(repository domain.SateliteRepository) TopSecretCreator {
 	return TopSecretCreator{
 		messageDecoder: NewMessageDecoder(),
 		locationFinder: NewLocationFinder(repository),
@@ -23,7 +24,7 @@ type TopSecretCreatorRequest struct {
 }
 
 type TopSecretCreatorResponse struct {
-	Position core.Position
+	Position dto.PositionResponse
 	Message  string
 }
 
@@ -48,7 +49,7 @@ func (creator TopSecretCreator) Create(requests []TopSecretCreatorRequest) (TopS
 	}
 
 	return TopSecretCreatorResponse{
-		Position: position,
+		Position: dto.NewPositionResponse(position.X().Value(), position.Y().Value()),
 		Message:  message,
 	}, nil
 }

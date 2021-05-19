@@ -1,4 +1,4 @@
-package handler
+package dto
 
 type PositionResponse struct {
 	X float64 `json:"x" binding:"required"`

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/franciscoruizar/quasar-fire/internal/platform/server/handler/health"
-	"github.com/franciscoruizar/quasar-fire/internal/platform/server/handler/topsecret"
+	"github.com/franciscoruizar/quasar-fire/internal/infrastructure/server/handler/health"
+	"github.com/franciscoruizar/quasar-fire/internal/infrastructure/server/handler/topsecret"
 	"github.com/franciscoruizar/quasar-fire/internal/usecases"
 	"github.com/gin-gonic/gin"
 )
