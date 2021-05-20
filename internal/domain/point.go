@@ -16,6 +16,10 @@ func NewPoint(value float64) (Point, error) {
 		return Point{}, ErrInvalidPoint
 	}
 
+	if value == -0 {
+		return Point{value: 0}, nil
+	}
+
 	return Point{value: value}, nil
 }
 
