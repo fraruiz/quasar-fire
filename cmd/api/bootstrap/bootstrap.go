@@ -5,7 +5,6 @@ import (
 	"github.com/franciscoruizar/quasar-fire/internal/infrastructure/storage/memory"
 
 	"github.com/franciscoruizar/quasar-fire/internal/usecases"
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/kelseyhightower/envconfig"
 )
 
