@@ -52,9 +52,11 @@ type Satelite struct {
 	id       SateliteID
 	name     SateliteName
 	position Position
+	distance float64
+	message  []string
 }
 
-func NewSatelite(id string, name string, x float64, y float64) (Satelite, error) {
+func NewSatelite(id string, name string, x float64, y float64, distance float64, message []string) (Satelite, error) {
 	idVO, err := NewSateliteID(id)
 
 	if err != nil {
@@ -77,6 +79,8 @@ func NewSatelite(id string, name string, x float64, y float64) (Satelite, error)
 		id:       idVO,
 		name:     nameVO,
 		position: positionVO,
+		distance: distance,
+		message:  message,
 	}, nil
 }
 
@@ -92,8 +96,16 @@ func (s Satelite) Position() Position {
 	return s.position
 }
 
+func (s Satelite) Distance() float64 {
+	return s.distance
+}
+
+func (s Satelite) Message() []string {
+	return s.message
+}
+
 type SateliteRepository interface {
-	Save(satelite Satelite) error
+	Update(satelite Satelite) error
 	FindAll() ([]Satelite, error)
 	FindByName(name string) (Satelite, error)
 }

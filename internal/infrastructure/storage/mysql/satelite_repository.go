@@ -19,7 +19,7 @@ func NewSateliteRepository(db *sql.DB) *SateliteRepository {
 	}
 }
 
-func (r *SateliteRepository) Save(satelite domain.Satelite) error {
+func (r *SateliteRepository) Update(satelite domain.Satelite) error {
 	sqlStruct := sqlbuilder.NewStruct(new(sqlSatelite))
 	query, args := sqlStruct.InsertInto(sqlSateliteTable, sqlSatelite{
 		ID:   satelite.ID().Value(),
@@ -82,6 +82,8 @@ func (r *SateliteRepository) parseAggregate(rows *sql.Rows) ([]domain.Satelite, 
 		var name string
 		var x float64
 		var y float64
+		var distance float64
+		var message []string
 
 		err := rows.Scan(&id, &name, &x, &y)
 
@@ -89,7 +91,7 @@ func (r *SateliteRepository) parseAggregate(rows *sql.Rows) ([]domain.Satelite, 
 			return nil, err
 		}
 
-		response, err := domain.NewSatelite(id, name, x, y)
+		response, err := domain.NewSatelite(id, name, x, y, distance, message)
 
 		if err != nil {
 			return nil, err

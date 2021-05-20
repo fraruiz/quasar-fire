@@ -12,9 +12,9 @@ type SateliteRepository struct {
 }
 
 func NewSateliteRepository() *SateliteRepository {
-	kenobi, err := domain.NewSatelite(uuid.NewString(), "kenobi", -500, -200)
-	skywalker, err1 := domain.NewSatelite(uuid.NewString(), "skywalker", 100, -100)
-	sato, err2 := domain.NewSatelite(uuid.NewString(), "sato", 500, 100)
+	kenobi, err := domain.NewSatelite(uuid.NewString(), "kenobi", -500, -200, 0, nil)
+	skywalker, err1 := domain.NewSatelite(uuid.NewString(), "skywalker", 100, -100, 0, nil)
+	sato, err2 := domain.NewSatelite(uuid.NewString(), "sato", 500, 100, 0, nil)
 
 	if err != nil || err1 != nil || err2 != nil {
 		return &SateliteRepository{
@@ -27,7 +27,13 @@ func NewSateliteRepository() *SateliteRepository {
 	}
 }
 
-func (r *SateliteRepository) Save(satelite domain.Satelite) error {
+func (r *SateliteRepository) Update(satelite domain.Satelite) error {
+	for i := 0; i < len(r.values); i++ {
+		if r.values[i].ID().Value() == satelite.ID().Value() {
+			r.values[i] = satelite
+		}
+	}
+
 	return nil
 }
 
