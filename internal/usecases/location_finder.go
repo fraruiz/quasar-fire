@@ -45,7 +45,11 @@ func (finder LocationFinder) Find(distances []float64, sattelites []string) (dom
 func (finder LocationFinder) getRadioBetweenDistanceAndPosition(satelites []domain.Satelite, distances []float64) ([]domain.Circle, error) {
 	var circles []domain.Circle
 	for i := 0; i < len(satelites); i++ {
-		circle, err := domain.NewCircle(satelites[i].Position().X().Value(), satelites[i].Position().Y().Value(), distances[i])
+		x := satelites[i].Position().X().Value()
+		y := satelites[i].Position().Y().Value()
+		radius := distances[i]
+
+		circle, err := domain.NewCircle(x, y, radius)
 
 		if err != nil {
 			return nil, err
@@ -60,13 +64,11 @@ func (finder LocationFinder) getRadioBetweenDistanceAndPosition(satelites []doma
 func (finder LocationFinder) findIntersectionsBetweenCircles(circles []domain.Circle) [][]domain.Position {
 	var positions [][]domain.Position
 	for i := 0; i < len(circles); i++ {
-		for j := 0; j < len(circles); j++ {
-			if j != i {
-				intersect, err := finder.intersectionCalculator.Calculate(circles[i], circles[j])
+		for j := i + 1; j < len(circles); j++ {
+			intersect, err := finder.intersectionCalculator.Calculate(circles[i], circles[j])
 
-				if err == nil {
-					positions = append(positions, intersect)
-				}
+			if err == nil {
+				positions = append(positions, intersect)
 			}
 		}
 	}

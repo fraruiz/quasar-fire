@@ -21,17 +21,22 @@ func NewTopSecretCreator(sateliteRepository domain.SateliteRepository) TopSecret
 
 func (creator TopSecretCreator) Create(requests []dto.TopSecretRequest) (dto.TopSecretResponse, error) {
 	var distances []float64
-	var messages [][]string
+	var messages []string
 	var satellitesName []string
 
 	for i := 0; i < len(requests); i++ {
 		request := requests[i]
-		messages = append(messages, request.Message)
+		messages = append(messages, request.Message...)
 		distances = append(distances, request.Distance)
 		satellitesName = append(satellitesName, request.Name)
 	}
 
-	message := creator.messageDecoder.Decode(messages)
+	message, err := creator.messageDecoder.Decode(messages)
+
+	if err != nil {
+		return dto.TopSecretResponse{}, err
+	}
+
 	position, err := creator.locationFinder.Find(distances, satellitesName)
 
 	if err != nil {

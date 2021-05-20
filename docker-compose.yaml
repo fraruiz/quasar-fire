@@ -1,15 +1,6 @@
 version: "3.8"
 
 services:
-  app:
-    container_name: quasar-fire_api
-    build: .
-    environment:
-      APP_HOST: 0.0.0.0
-      APP_DBHOST: mysql
-    ports:
-      - 8080:8080
-
   mysql:
     container_name: quasar-fire_mysql
     image: mysql:8

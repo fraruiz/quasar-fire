@@ -5,14 +5,14 @@ type Circle struct {
 	radius Point
 }
 
-func NewCircle(x, y, r float64) (Circle, error) {
+func NewCircle(x, y, radius float64) (Circle, error) {
 	centerVO, err := NewPosition(x, y)
 
 	if err != nil {
 		return Circle{}, err
 	}
 
-	radiusVO, err := NewPoint(x)
+	radiusVO, err := NewPoint(radius)
 
 	if err != nil {
 		return Circle{}, err
