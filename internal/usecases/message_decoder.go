@@ -2,6 +2,7 @@ package usecases
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 )
 
@@ -19,12 +20,14 @@ func (decoder MessageDecoder) Decode(messages ...[]string) (string, error) {
 		return "", err
 	}
 
-	wordsNotRepeat := make([]string, 0)
+	size := len(messages[0])
+	var wordsNotRepeat []string
 
-	for item := 0; item < len(messages); item++ {
-		for subitem := 0; subitem < len(messages[item]); subitem++ {
-			if !decoder.constains(wordsNotRepeat, messages[item][subitem]) {
-				wordsNotRepeat = append(wordsNotRepeat, messages[item][subitem])
+	for i := 0; i < size; i++ {
+		for j := 0; j < len(messages); j++ {
+			fmt.Println(messages[j][i])
+			if messages[j][i] != "" && !decoder.constains(wordsNotRepeat, messages[j][i]) {
+				wordsNotRepeat = append(wordsNotRepeat, messages[j][i])
 			}
 		}
 	}
