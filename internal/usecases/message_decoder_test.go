@@ -25,14 +25,14 @@ func Test_MessageDecoder_Succeed(t *testing.T) {
 func Test_MessageDecoder_Succeed_Case2(t *testing.T) {
 	message1 := []string{"este", "", "", "mensaje", ""}
 	message2 := []string{"", "es", "", "", "mensaje"}
-	message3 := []string{"este", "", "un", "", ""}
+	message3 := []string{"este", "", "un", "", "secreto"}
 
 	messages := [][]string{message1, message2, message3}
 
 	decoder := usecases.NewMessageDecoder()
 	actual, _ := decoder.Decode(messages...)
 
-	expected := "este es un mensaje"
+	expected := "este es un mensaje secreto"
 
 	assert.Equal(t, expected, actual)
 }
