@@ -1,7 +1,7 @@
 # Documentation
 
 ## Introduction
-  ![Read Quasar Fire Challenge](https://github.com/franciscoruizar/quasar-fire/docs/challenge.pdf)
+  ![Read Quasar Fire Challenge](https://github.com/franciscoruizar/quasar-fire/blob/main/docs/challenge.pdf)
   
 ### How to resolve the challenge?
 
