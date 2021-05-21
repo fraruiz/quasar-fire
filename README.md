@@ -5,7 +5,7 @@
 1. Install Golang
 2. Clone this repository: `git clone https://github.com/franciscoruizar/quasar-fire`.
 3. Read [Docs](https://github.com/franciscoruizar/quasar-fire/blob/main/docs/docs.md) & [API Documentation](https://documenter.getpostman.com/view/12160106/TzXtHKur)
-4. Run the project: make run.
+4. Run the project: `make run`.
 5. Start developing
 
 ## Deploy
