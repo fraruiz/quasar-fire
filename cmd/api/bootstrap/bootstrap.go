@@ -27,5 +27,5 @@ func Run() error {
 type config struct {
 	// Server configuration
 	Host string `default:"localhost"`
-	Port uint   `default:"8080"`
+	Port uint   `default:"8081"`
 }

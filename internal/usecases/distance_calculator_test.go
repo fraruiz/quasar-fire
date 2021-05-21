@@ -12,7 +12,7 @@ import (
 func Test_DistanceCalculator_Succeed(t *testing.T) {
 	positionA, _ := domain.NewPosition(-500, -200)
 	positionB, _ := domain.NewPosition(100, -100)
-	expected := 608
+	expected := 608.0
 
 	calculator := usecases.NewDistanceCalculator()
 

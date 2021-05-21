@@ -30,7 +30,7 @@ func (decoder MessageDecoder) Decode(messages ...[]string) (string, error) {
 	}
 
 	content := strings.Join(wordsNotRepeat[:], " ")
-
+	content = strings.Trim(content, " ")
 	return content, nil
 }
 
