@@ -1,0 +1,6 @@
+runtime: go
+
+main: ./cmd/api
+
+- url: /.*
+  script: auto
