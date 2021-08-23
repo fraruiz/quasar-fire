@@ -1,4 +1,4 @@
-# 🚀 Quasar-Fire | Mercado Libre Challenge
+# 🚀 Quasar-Fire
 
 ## 🏁 How To Start
 
