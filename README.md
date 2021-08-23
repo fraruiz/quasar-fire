@@ -10,8 +10,6 @@
 
 ## Deploy
 
-http://3.143.245.230:8000/
-
 ### Tools & architecture
 - Golang
 - Gin-Gonic Server
@@ -19,9 +17,9 @@ http://3.143.245.230:8000/
 - AWS
 
 ### Endpoints
-- Health-check       `GET` `http://3.143.245.230:8000/health`
-- Top Secret         `POST` `http://3.143.245.230:8000/topsecret`
-- Top Secret Split   `POST` `http://3.143.245.230:8000/topsecret_split/{satelite_name}`
+- Health-check       `GET` `http://localhost:8000/health`
+- Top Secret         `POST` `http://localhost:8000/topsecret`
+- Top Secret Split   `POST` `http://localhost:8000/topsecret_split/{satelite_name}`
 
 
 ### Commands
